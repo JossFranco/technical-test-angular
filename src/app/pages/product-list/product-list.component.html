@@ -1,0 +1,80 @@
+<app-bank-header></app-bank-header>
+<div class="products-container">
+  <div class="products-container__header">
+    <app-search-input
+      (searchTerm)="onSearchTermChange($event)"
+    ></app-search-input>
+    <button (click)="addProduct()">Agregar</button>
+  </div>
+  <div class="products-container__wrapper">
+    <table class="products-container__table">
+      <thead>
+        <tr>
+          <th>Logo</th>
+          <th>Nombre del producto</th>
+          <th>
+            <div class="products-container__center">
+              Descripción
+              <span class="material-symbols-outlined">info</span>
+            </div>
+          </th>
+          <th>
+            <div class="products-container__center">
+              Fecha de liberación
+              <span class="material-symbols-outlined">info</span>
+            </div>
+          </th>
+          <th>
+            <div class="products-container__center">
+              Fecha de reestructuración
+              <span class="material-symbols-outlined">info</span>
+            </div>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(productsFiltered.length > 0){ @for(product of
+        productsFiltered.slice(0, itemsPerPage); track product.id){
+        <tr>
+          <td>
+            <img
+              [src]="product.logo"
+              alt="Logo"
+              class="products-container__logo"
+            />
+          </td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.description }}</td>
+          <td>{{ product.date_release }}</td>
+          <td>{{ product.date_revision }}</td>
+          <td>
+            <app-product-action-menu
+              [product]="product"
+            ></app-product-action-menu>
+          </td>
+        </tr>
+        } } @else {
+        <tr>
+          <td colspan="6">No hay resultados</td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="products-container__pagination">
+      <span class="products-container__pagination-info">
+        {{ productsFiltered.slice(0, itemsPerPage).length }} Resultados
+      </span>
+      <select [(ngModel)]="itemsPerPage">
+        <option value="5">5</option>
+        <option value="10">10</option>
+        <option value="20">20</option>
+      </select>
+    </div>
+  </div>
+</div>
+<app-alert-confirm
+  [open]="modalOpen"
+  [title]="modalTitle"
+  [content]="modalContent"
+></app-alert-confirm>

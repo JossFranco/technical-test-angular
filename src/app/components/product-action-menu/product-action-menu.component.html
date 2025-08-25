@@ -1,0 +1,23 @@
+<div
+  class="options__dropdown"
+  [class.options__dropdown--open]="isMenuOpen"
+  (click)="toggleMenu()"
+>
+  <span class="material-symbols-outlined">more_vert</span>
+  @if(isMenuOpen){
+  <div class="options__dropdown-menu">
+    <a (click)="editProduct()">Editar</a>
+    <a (click)="deleteProduct()">Eliminar</a>
+  </div>
+  }
+</div>
+<app-alert-confirm
+  [open]="modalOpen"
+  title="Eliminacion de producto"
+  [showFooter]="true"
+  (confirmClick)="onDeleteConfirm()"
+  (cancelClick)="onCancel()"
+  [content]="
+    '¿Estás seguro de que deseas eliminar el producto ' + product?.name + '?'
+  "
+></app-alert-confirm>

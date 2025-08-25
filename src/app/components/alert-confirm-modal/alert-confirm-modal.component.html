@@ -1,0 +1,19 @@
+@if(open){
+<div class="modal-backdrop" (click)="close()">
+  <div class="modal">
+    <div class="modal__header">
+      <div class="modal__title">{{ title }}</div>
+      <button class="modal__close" (click)="close()">×</button>
+    </div>
+    <div class="modal__content">
+      <div>{{ content }}</div>
+    </div>
+    @if(showFooter){
+    <div class="modal__footer">
+      <button class="modal__cancel" (click)="close()">Cancelar</button>
+      <button class="modal__confirm" (click)="confirm()">Confirmar</button>
+    </div>
+    }
+  </div>
+</div>
+}

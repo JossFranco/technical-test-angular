@@ -1,0 +1,15 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #ffff;
+  &__title {
+    font-size: 2rem;
+    color: #051d55;
+  }
+}
+.material-symbols-outlined {
+  color: #051d55;
+  font-size: 2rem;
+}

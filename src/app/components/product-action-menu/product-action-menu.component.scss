@@ -1,0 +1,35 @@
+.options {
+  &__dropdown {
+    position: relative;
+
+    .material-symbols-outlined {
+      cursor: pointer;
+      user-select: none;
+      font-size: 0.9rem;
+    }
+
+    &-menu {
+      position: absolute;
+      top: 30px;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      z-index: 100;
+      padding: 8px 0;
+
+      a {
+        display: block;
+        padding: 8px 16px;
+        cursor: pointer;
+        white-space: nowrap;
+        transition: background 0.2s ease;
+
+        &:hover {
+          background: #f0f0f0;
+        }
+      }
+    }
+  }
+}

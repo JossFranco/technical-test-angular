@@ -1,0 +1,185 @@
+<app-bank-header></app-bank-header>
+<div class="productFormContainer">
+  <form
+    [formGroup]="productForm"
+    class="productForm"
+    (ngSubmit)="onSubmit()"
+    novalidate
+  >
+    <div class="productForm__title">{{ pageTitle }}</div>
+    <div class="productForm__content-fields">
+      <div class="productForm__field">
+        <label for="id">ID</label>
+        <input
+          id="id"
+          type="text"
+          formControlName="id"
+          placeholder="prd-002"
+          class="productForm__input"
+          [ngClass]="{
+            'productForm__input--error':
+              productForm.get('id')?.invalid && productForm.get('id')?.touched
+          }"
+        />
+        @if(productForm.get('id')?.invalid && productForm.get('id')?.touched){
+        <div class="productForm__error">
+          @switch (true) { @case (productForm.get('id')?.errors?.['required'] !=
+          null){
+          <span>ID es requerido</span>
+          } @case (productForm.get('id')?.errors?.['minlength'] != null){
+          <span>El ID debe tener mínimo 3 caracteres</span>
+          } @case (productForm.get('id')?.errors?.['maxlength'] != null){
+          <span>El ID debe tener máximo 10 caracteres</span>
+          } @case (productForm.get('id')?.errors?.['idExists'] != null){
+          <span>Este ID ya existe</span>
+          } }
+        </div>
+        }
+      </div>
+      <div class="productForm__field">
+        <label for="name">Nombre</label>
+        <input
+          id="name"
+          type="text"
+          formControlName="name"
+          placeholder="Tarjeta Crédito"
+          class="productForm__input"
+          [ngClass]="{
+            'productForm__input--error':
+              productForm.get('name')?.invalid &&
+              productForm.get('name')?.touched
+          }"
+        />
+        @if(productForm.get('name')?.invalid &&
+        productForm.get('name')?.touched){
+        <div class="productForm__error">
+          @switch (true) { @case (productForm.get('name')?.errors?.['required']
+          != null){
+          <span>Nombre es requerido</span>
+          } @case (productForm.get('name')?.errors?.['minlength'] != null){
+          <span>El nombre debe tener mínimo 5 caracteres</span>
+          } @case (productForm.get('name')?.errors?.['maxlength'] != null){
+          <span>El nombre debe tener máximo 100 caracteres</span>
+          } }
+        </div>
+        }
+      </div>
+      <div class="productForm__field">
+        <label for="description">Descripción</label>
+        <input
+          id="description"
+          type="text"
+          formControlName="description"
+          placeholder="Tarjeta de crédito con beneficios exclusivos"
+          class="productForm__input"
+          [ngClass]="{
+            'productForm__input--error':
+              productForm.get('description')?.invalid &&
+              productForm.get('description')?.touched
+          }"
+        />
+        @if(productForm.get('description')?.invalid &&
+        productForm.get('description')?.touched){
+        <div class="productForm__error">
+          @switch (true) { @case
+          (productForm.get('description')?.errors?.['required'] != null){
+          <span>Descripción es requerida</span>
+          } @case (productForm.get('description')?.errors?.['minlength'] !=
+          null){
+          <span>La descripción debe tener mínimo 10 caracteres</span>
+          } @case (productForm.get('description')?.errors?.['maxlength'] !=
+          null){
+          <span>La descripción debe tener máximo 200 caracteres</span>
+          } }
+        </div>
+        }
+      </div>
+
+      <div class="productForm__field">
+        <label for="logo">Logo</label>
+        <input
+          id="logo"
+          type="text"
+          placeholder="assets-1.png"
+          formControlName="logo"
+          class="productForm__input"
+          [ngClass]="{
+            'productForm__input--error':
+              productForm.get('logo')?.invalid &&
+              productForm.get('logo')?.touched
+          }"
+        />
+        @if(productForm.get('logo')?.invalid &&
+        productForm.get('logo')?.touched){
+        <div class="productForm__error">
+          @switch (true) { @case (productForm.get('logo')?.errors?.['required']
+          != null){
+          <span>Logo es requerido</span>
+          } }
+        </div>
+        }
+      </div>
+
+      <div class="productForm__field">
+        <label for="date_release">Fecha de Liberación</label>
+        <input
+          id="date_release"
+          type="date"
+          formControlName="date_release"
+          class="productForm__input"
+          [ngClass]="{
+            'productForm__input--error':
+              productForm.get('date_release')?.invalid &&
+              productForm.get('date_release')?.touched
+          }"
+        />
+        @if(productForm.get('date_release')?.invalid &&
+        productForm.get('date_release')?.touched){
+        <div class="productForm__error">
+          @switch (true) { @case
+          (productForm.get('date_release')?.errors?.['required'] != null){
+          <span>La fecha de liberación es requerida</span>
+          } @case (productForm.get('date_release')?.errors?.['dateInvalid'] !=
+          null){
+          <span>La fecha debe ser igual o mayor a hoy</span>
+          } }
+        </div>
+        }
+      </div>
+      <div class="productForm__field">
+        <label for="date_revision">Fecha de Revisión</label>
+        <input
+          id="date_revision"
+          type="date"
+          formControlName="date_revision"
+          class="productForm__input"
+        />
+      </div>
+    </div>
+    <div class="productForm__buttons">
+      <button
+        class="productForm__button-reset"
+        type="button"
+        (click)="onReset()"
+      >
+        Reiniciar
+      </button>
+      <button
+        class="productForm__button-send"
+        type="button"
+        (click)="onSubmit()"
+        [ngClass]="{
+          'productForm__button-send--disabled': productForm.invalid
+        }"
+        [disabled]="productForm.invalid"
+      >
+        Enviar
+      </button>
+    </div>
+  </form>
+</div>
+<app-alert-confirm
+  [open]="modalOpen"
+  [title]="modalTitle"
+  [content]="modalContent"
+></app-alert-confirm>
