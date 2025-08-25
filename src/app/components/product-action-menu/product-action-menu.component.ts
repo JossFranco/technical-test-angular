@@ -9,23 +9,18 @@ import { ProductService } from '../../services/product.service';
   standalone: true,
   imports: [AlertConfirmModalComponent],
   templateUrl: './product-action-menu.component.html',
-  styleUrl: './product-action-menu.component.scss'
+  styleUrl: './product-action-menu.component.scss',
 })
 export class ProductActionMenuComponent {
-
   @Input() product?: Product;
 
   isMenuOpen: boolean = false;
-
   modalOpen: boolean = false;
   modalTitle: string = '';
   modalContent: string = '';
   modalFooter: boolean = false;
 
-  constructor(
-    private router: Router,
-    private productService: ProductService
-  ) { }
+  constructor(private router: Router, private productService: ProductService) {}
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -38,7 +33,7 @@ export class ProductActionMenuComponent {
   deleteProduct() {
     this.isMenuOpen = false;
     this.modalFooter = true;
-    this.modalTitle = "Confirmar eliminación";
+    this.modalTitle = 'Confirmar eliminación';
     this.modalContent = `¿Estás seguro de que deseas eliminar el producto ${this.product?.name}?`;
     this.modalOpen = true;
   }
@@ -50,8 +45,9 @@ export class ProductActionMenuComponent {
         this.router.navigate(['']);
       },
       error: () => {
-        this.modalTitle = "¡Ups algo salio mal!";
-        this.modalContent = "No pudimos eliminar el producto. Por favor, intenta nuevamente más tarde.";
+        this.modalTitle = '¡Ups algo salio mal!';
+        this.modalContent =
+          'No pudimos eliminar el producto. Por favor, intenta nuevamente más tarde.';
         this.modalFooter = false;
         this.modalOpen = true;
       },

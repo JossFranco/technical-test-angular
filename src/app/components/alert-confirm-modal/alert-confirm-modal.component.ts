@@ -25,9 +25,13 @@ export class AlertConfirmModalComponent {
   constructor(private eRef: ElementRef) {}
 
   @HostListener('document:click', ['$event'])
-  @HostListener('document:click', ['$event'])
   handleClickOutside(event: MouseEvent) {
-    if (this.open && !this.eRef.nativeElement.querySelector('.modal-content')?.contains(event.target as Node)) {
+    if (
+      this.open &&
+      !this.eRef.nativeElement
+        .querySelector('.modal-content')
+        ?.contains(event.target as Node)
+    ) {
       this.close();
     }
   }

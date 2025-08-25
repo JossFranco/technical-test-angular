@@ -26,17 +26,20 @@ export class ProductService {
   }
 
   addProduct(product: Product) {
-    return this.http.post<Product>(`${this.apiUrl}/bp/products`, product)
-       .pipe(tap(() => this.productsUpdated.next()));
+    return this.http
+      .post<Product>(`${this.apiUrl}/bp/products`, product)
+      .pipe(tap(() => this.productsUpdated.next()));
   }
 
   updateProduct(id: string, product: Product) {
-    return this.http.put<Product>(`${this.apiUrl}/bp/products/${id}`, product)
-     .pipe(tap(() => this.productsUpdated.next()));
+    return this.http
+      .put<Product>(`${this.apiUrl}/bp/products/${id}`, product)
+      .pipe(tap(() => this.productsUpdated.next()));
   }
 
   deleteProduct(id: string) {
-    return this.http.delete(`${this.apiUrl}/bp/products/${id}`)
-       .pipe(tap(() => this.productsUpdated.next()));
+    return this.http
+      .delete(`${this.apiUrl}/bp/products/${id}`)
+      .pipe(tap(() => this.productsUpdated.next()));
   }
 }

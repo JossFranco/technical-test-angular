@@ -37,7 +37,7 @@ export class ProductListComponent {
     this.loadProducts();
 
     this.productService.productsUpdated$.subscribe(() => {
-    this.loadProducts();
+      this.loadProducts();
     });
   }
 
